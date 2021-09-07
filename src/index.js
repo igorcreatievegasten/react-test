@@ -17,6 +17,8 @@ butter.post.list({page: 1, page_size: 10}).then(function(response) {
   console.log(response)
 })
 
+console.log(butter.page.retrieve('*', 'test'))
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
