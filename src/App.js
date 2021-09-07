@@ -8,6 +8,8 @@ import ReactMarkdown from 'react-markdown';
 import FetchData from './fetch/fetchData';
 import FetchThatData from './fetch/fetchData';
 import useApi from './fetch/fetchData';
+import easyFetch from 'cg-easyfetch';
+
 
 function Footer() {
   //const apiEndpoint = 'https://creatievegasten.prismic.io/api/v2';
@@ -17,9 +19,18 @@ function Footer() {
 
   //const Client = Prismic.client(apiEndpoint, {accessToken})
 
-  const { data, error, isLoaded } = useApi(
+  // const { data, error, isLoaded } = useApi(
+  //   "http://localhost:1337/tests/1"
+  // )
+
+  // const { data, error, isLoaded } = useApi(
+  //   "http://localhost:1337/tests/1"
+  // )
+
+  const { data, error, isLoaded } = easyFetch(
     "http://localhost:1337/tests/1"
   )
+
 
   //strapi
   // useEffect(() => {
