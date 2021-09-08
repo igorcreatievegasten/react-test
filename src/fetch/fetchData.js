@@ -22,7 +22,9 @@ const useApi = url => {
         fetchData();
     }, [url]);
 
-    return { error, isLoaded, data}
+    const obj = {error, isLoaded, data}
+    return obj
+    //return { error, isLoaded, data}
 }
 
 
