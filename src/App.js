@@ -7,34 +7,64 @@ import {Data,Link,RichText} from 'prismic-reactjs';
 import ReactMarkdown from 'react-markdown';
 import FetchData from './fetch/fetchData';
 import FetchThatData from './fetch/fetchData';
-import useApi from './fetch/fetchData';
+//import useApi from './fetch/fetchData';
 import easyFetch from 'cg-easyfetch';
+import axios from 'axios';
+
+
+
+const useApi = url => {
+  const [data, setData] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchData = () => {
+    axios
+        .get(url)
+        .then(response => {
+            setIsLoaded(true);
+            setData(response.data);
+        })
+        .catch(error => {
+            setError(error);
+        });
+  };
+  fetchData();
+
+  const obj = {error, isLoaded, data}
+  return obj
+  //return { error, isLoaded, data}
+}
+
 
 
 function Footer() {
 
-  const { data, error, isLoaded } = easyFetch(
-    "http://localhost:1337/tests/1"
-  )
+  // const { data, error, isLoaded } = easyFetch(
+  //   "http://localhost:1337/tests/1"
+  // )
 
-  const obj2 = easyFetch(
-    "http://localhost:1337/tests/1"
-  )
-
-  const obj1 = easyFetch(
-    "http://localhost:1337/tests/1"
-  )
+  const obj = useApi("http://75.119.147.24:1337/home")
+  const obj2 = easyFetch("http://75.119.147.24:1337/home/")
 
 
-  if (error !== null) {
-    return <div>Error: {error.message}</div>
-  }
-  if (!isLoaded) {
-    return <div>Loading...</div>
-  }
+
+  // const obj2 = easyFetch(
+  //   "http://localhost:1337/tests/1"
+  // )
+
+  // const obj1 = easyFetch("http://localhost:1337/tests/1")
+
+
+  // if (error !== null) {
+  //   return <div>Error: {error.message}</div>
+  // }
+  // if (!isLoaded) {
+  //   return <div>Loading...</div>
+  // }
   return (
-    //<div>{data.text}</div>
-    <ReactMarkdown children={obj2.data.text + obj1.data.text} />
+    <div>{JSON.stringify(obj.data.Een[0].id)}</div>
+    // <ReactMarkdown children={obj.data.id} />
   )
 
 }
